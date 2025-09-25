@@ -1,0 +1,196 @@
+#############################################################################################################
+#                                                                                                           #
+# Docker环境专用配置文件                                                                                      #
+#                                                                                                           #
+#############################################################################################################
+
+# 项目配置
+project:
+  name: seer_admin
+  log-directory: /app/logs
+
+# 服务器配置
+server:
+  port: 8086
+  servlet:
+    context-path: /
+  # Tomcat配置
+  tomcat:
+    basedir: /app/logs/tomcat-logs
+    accesslog:
+      enabled: true
+      max-days: 7
+      pattern: "%t %{X-Forwarded-For}i %a %r %s (%D ms) %I (%B byte)"
+
+# 环境配置
+spring:
+  # 注意：删除了 profiles.active 配置，因为已通过启动参数设置
+
+  # 数据库连接配置
+  datasource:
+    url: jdbc:mysql://mysql:3306/seer_admin?autoReconnect=true&useServerPreparedStmts=false&rewriteBatchedStatements=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: nfc_user
+    password: nfc_pass_2024
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initial-size: 5
+    min-idle: 5
+    max-active: 20
+    max-wait: 60000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    filters: stat
+    druid:
+      username: druid
+      password: 1024
+      login:
+        enabled: false
+      method:
+        pointcut: com.seerbigdata.sa..*Service.*
+
+  # Redis连接配置
+  data:
+    redis:
+      database: 0
+      host: redis
+      port: 6379
+      password:
+      timeout: 10000ms
+      lettuce:
+        pool:
+          max-active: 8
+          min-idle: 2
+          max-idle: 8
+          max-wait: 30000ms
+
+  # 邮件配置
+  mail:
+    host: smtp.163.com
+    port: 465
+    username: your-email@163.com
+    password: your-email-password
+    test-connection: false
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+            socketFactory:
+              class: com.sun.mail.util.MailSSLSocketFactory
+              fallback: false
+        debug: false
+
+  # JSON序列化配置
+  jackson:
+    serialization:
+      write-enums-using-to-string: true
+      write-dates-as-timestamps: false
+    deserialization:
+      read-enums-using-to-string: true
+      fail-on-unknown-properties: false
+    default-property-inclusion: always
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  # 文件上传配置
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 10MB
+
+  # 缓存配置
+  cache:
+    type: redis
+
+# 健康检查配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  health:
+    mail:
+      enabled: false
+
+# 文件存储配置
+file:
+  storage:
+    mode: local
+    local:
+      upload-path: /app/upload/
+      url-prefix: http://172.20.186.7:18086/upload/
+
+# API文档配置
+springdoc:
+  swagger-ui:
+    enabled: true
+    doc-expansion: none
+    tags-sorter: alpha
+  api-docs:
+    enabled: true
+
+knife4j:
+  enable: true
+  basic:
+    enable: false
+
+# HTTP配置
+http:
+  pool:
+    max-total: 20
+    connect-timeout: 50000
+    read-timeout: 50000
+    write-timeout: 50000
+    keep-alive: 300000
+
+# 跨域配置
+access-control-allow-origin: '*'
+
+# 心跳配置
+heart-beat:
+  interval-seconds: 300
+
+# 热加载配置
+reload:
+  interval-seconds: 300
+
+# Sa-Token配置
+sa-token:
+  token-name: Authorization
+  token-prefix: Bearer
+  timeout: 2592000
+  active-timeout: -1
+  is-concurrent: true
+  is-share: false
+  token-style: simple-uuid
+  auto-renew: true
+  is-log: true
+  log-level: info
+  is-print: false
+  is-read-cookie: false
+
+# 定时任务配置
+smart:
+  job:
+    enabled: true
+    init-delay: 10
+    core-pool-size: 2
+    db-refresh-enabled: true
+    db-refresh-interval: 60
+
+# 日志配置
+logging:
+  level:
+    com.seerbigdata.sa: INFO
+    org.springframework: WARN
+    com.baomidou.mybatisplus: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+  file:
+    name: /app/logs/nfc-lock.log
+  logback:
+    rollingpolicy:
+      max-file-size: 100MB
+      max-history: 30
+      total-size-cap: 1GB
