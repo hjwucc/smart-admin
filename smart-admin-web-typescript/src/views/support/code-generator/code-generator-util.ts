@@ -13,18 +13,25 @@ JavaTypeMap.set('integer', 'Integer');
 JavaTypeMap.set('year', 'Integer');
 JavaTypeMap.set('bigint', 'Long');
 JavaTypeMap.set('int8', 'Long');
+JavaTypeMap.set('number', 'Long');
 JavaTypeMap.set('float', 'BigDecimal');
 JavaTypeMap.set('double', 'BigDecimal');
 JavaTypeMap.set('decimal', 'BigDecimal');
 JavaTypeMap.set('char', 'String');
 JavaTypeMap.set('varchar', 'String');
+JavaTypeMap.set('varchar2', 'String');
+JavaTypeMap.set('nvarchar', 'String');
+JavaTypeMap.set('nvarchar2', 'String');
 JavaTypeMap.set('tinytext', 'String');
 JavaTypeMap.set('text', 'String');
 JavaTypeMap.set('longtext', 'String');
 JavaTypeMap.set('blob', 'String');
+JavaTypeMap.set('clob', 'String');
 JavaTypeMap.set('date', 'LocalDate');
 JavaTypeMap.set('datetime', 'LocalDateTime');
+JavaTypeMap.set('datetime2', 'LocalDateTime');
 JavaTypeMap.set('timestamp', 'LocalDateTime');
+JavaTypeMap.set('timestamp without time zone', 'LocalDateTime');
 
 export const JavaTypeList = [
   'Boolean', //
@@ -49,6 +56,7 @@ JsTypeMap.set('int', 'Number');
 JsTypeMap.set('int2', 'Number');
 JsTypeMap.set('int4', 'Number');
 JsTypeMap.set('int8', 'Number');
+JsTypeMap.set('number', 'Number');
 JsTypeMap.set('tinyint', 'Number');
 JsTypeMap.set('smallint', 'Number');
 JsTypeMap.set('integer', 'Number');
@@ -59,14 +67,20 @@ JsTypeMap.set('double', 'Number');
 JsTypeMap.set('decimal', 'Number');
 JsTypeMap.set('char', 'String');
 JsTypeMap.set('varchar', 'String');
+JsTypeMap.set('varchar2', 'String');
+JsTypeMap.set('nvarchar', 'String');
+JsTypeMap.set('nvarchar2', 'String');
 JsTypeMap.set('character', 'String');
 JsTypeMap.set('tinytext', 'String');
 JsTypeMap.set('text', 'String');
 JsTypeMap.set('longtext', 'String');
 JsTypeMap.set('blob', 'String');
+JsTypeMap.set('clob', 'String');
 JsTypeMap.set('date', 'Date');
 JsTypeMap.set('datetime', 'Date');
+JsTypeMap.set('datetime2', 'Date');
 JsTypeMap.set('timestamp', 'Date');
+JsTypeMap.set('timestamp without time zone', 'Date');
 
 export const JsTypeList = [
   'Boolean', //
@@ -88,6 +102,7 @@ FrontComponentMap.set('int', 'InputNumber');
 FrontComponentMap.set('int2', 'InputNumber');
 FrontComponentMap.set('int4', 'InputNumber');
 FrontComponentMap.set('int8', 'InputNumber');
+FrontComponentMap.set('number', 'InputNumber');
 FrontComponentMap.set('tinyint', 'InputNumber');
 FrontComponentMap.set('smallint', 'InputNumber');
 FrontComponentMap.set('integer', 'InputNumber');
@@ -99,13 +114,19 @@ FrontComponentMap.set('double', 'InputNumber');
 FrontComponentMap.set('decimal', 'InputNumber');
 FrontComponentMap.set('char', 'Input');
 FrontComponentMap.set('varchar', 'Input');
+FrontComponentMap.set('varchar2', 'Input');
+FrontComponentMap.set('nvarchar', 'Input');
+FrontComponentMap.set('nvarchar2', 'Input');
 FrontComponentMap.set('character', 'Input');
 FrontComponentMap.set('tinytext', 'Input');
 FrontComponentMap.set('text', 'Textarea');
 FrontComponentMap.set('longtext', 'Textarea');
 FrontComponentMap.set('blob', 'FileUpload');
+FrontComponentMap.set('clob', 'FileUpload');
 FrontComponentMap.set('date', 'Date');
 FrontComponentMap.set('datetime', 'DateTime');
+FrontComponentMap.set('datetime2', 'DateTime');
+FrontComponentMap.set('timestamp without time zone', 'DateTime');
 
 export function getFrontComponent(dataType) {
   return FrontComponentMap.get(dataType);
